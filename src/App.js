@@ -76,11 +76,11 @@ class App extends Component {
                 //YOU NEED TO PROVIDE YOUR "APIXU" API KEY HERE, see /utils/api.js file to grab the DOCUMENTATION file
                 apiKey: NEWS_API_KEY,
                 source: 'techcrunch'
-            } )
+            })
 
             this.setState( {
                 news: _news
-            } )
+            })
 
         }
         catch ( error ) {
@@ -105,8 +105,8 @@ class App extends Component {
                 "articles": [
                     {
                         "author": "TNW Deals",
-                        "title": "Get 2TB of cloud storage for life — for under $50",
-                        "description": "Cleaning up your computer is more than simple aesthetics. Years of accumulated pictures, videos and assorted files on your hard drive don’t just create piles of extra stuff on your system — they actually contribute to slowing down your computer significantly. You can clear out that file glut and get your computer back to top performance …",
+                        "title": "Get 2TB of cloud storage for life â€” for under $50",
+                        "description": "Cleaning up your computer is more than simple aesthetics. Years of accumulated pictures, videos and assorted files on your hard drive donâ€™t just create piles of extra stuff on your system â€” they actually contribute to slowing down your computer significantly. You can clear out that file glut and get your computer back to top performance â€¦",
                         "url": "https://thenextweb.com/offers/2017/03/10/get-2tb-cloud-storage-life-50/",
                         "urlToImage": "https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2017/03/sale_7030_image_wide.png",
                         "publishedAt": "2017-03-09T11:36:57Z"
@@ -122,7 +122,7 @@ class App extends Component {
                     {
                         "author": "Napier Lopez",
                         "title": "Google takes on Slack with new Hangouts 'Chat' and 'Meet' apps",
-                        "description": "Ever since Google launched Allo and Duo, we’ve known that Hangouts would be making the transition from a consumer-focused product to a business one. That change begins today with the announcement of Hangouts Chat and Hangouts Meet. While the standard Hangouts app will stick around for a while, it’s essentially being replaced by Chat and Meet. …",
+                        "description": "Ever since Google launched Allo and Duo, weâ€™ve known that Hangouts would be making the transition from a consumer-focused product to a business one. That change begins today with the announcement of Hangouts Chat and Hangouts Meet. While the standard Hangouts app will stick around for a while, itâ€™s essentially being replaced by Chat and Meet. â€¦",
                         "url": "https://thenextweb.com/google/2017/03/09/google-takes-slack-new-hangouts-chat-meet-apps/",
                         "urlToImage": "https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2017/03/d-inscreen-01-room_1-1.png",
                         "publishedAt": "2017-03-09T19:43:35Z"
@@ -140,7 +140,7 @@ class App extends Component {
 
             return (
                 <NewsCard picture={ defaultPicture } text={ 'hey' } title={ _title }
-                />
+                    />
             )
         }
 

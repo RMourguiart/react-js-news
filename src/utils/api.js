@@ -24,5 +24,5 @@ export function get( url, queryParameters ) {
         json: true,
         uri: url,
         qs: queryParameters
-    } )
+    })
 }
