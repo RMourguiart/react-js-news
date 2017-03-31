@@ -8,7 +8,7 @@ import defaultPicture from './components/img/default.jpg'
 
 const Materialize = window.Materialize
 
-const APP_TITLE = 'Awesome App'
+const APP_TITLE = 'M&P News'
 //update document title (displayed in the opened browser tab)
 document.title = APP_TITLE
 
@@ -26,6 +26,12 @@ class App extends Component {
         super( props )
         this.state = {
             news: undefined,
+            urlToImage: undefined,
+            description: undefined,
+            s: '',
+            listSource: [],
+            language: undefined,
+            category: ''
         }
     }
 
@@ -40,8 +46,22 @@ class App extends Component {
 
                 <div className="App-content">
                     <div className="center-align">
-
+                        <i className="material-icons">library_books</i>
                         <form onSubmit={ this.fetchNews }>
+
+                            <select className="browser-default" value={ this.state.s } onChange={ this.handleChange }>
+                                <option value="">Select a source</option>
+                                {
+                                    this.state.listSource.map( item => {
+                                        return <option value={ item.id }>{ item.name }</option>
+                                    }
+                                    )
+                                }
+                            </select>
+
+
+
+                            <p></p>
 
                             <button type="submit" className="waves-effect waves-light btn">
                                 Get some news!
@@ -52,7 +72,7 @@ class App extends Component {
                     </div>
 
                     <div className="row" style={ { marginTop: 20 } } >
-                        <div className="col s12 m6 offset-m3">
+                        <div className="col s12 m10 ">
                             { this.displayNews() }
                         </div>
                     </div>
@@ -62,6 +82,18 @@ class App extends Component {
         )
     }
 
+
+    handleChange = ( event ) => {
+        this.setState( {
+            s: event.target.value
+        })
+    }
+
+    handleChangeBis = ( event ) => {
+        this.setState( {
+            category: event.target.value
+        })
+    }
 
     //method triggered by onSubmit event of the form or by onClick event of the "Get some news!" button
     /* Arrow function syntax used for Autobinding, see details here : https://facebook.github.io/react/docs/react-without-es6.html#autobinding */
@@ -75,11 +107,39 @@ class App extends Component {
             let _news = await get( ENDPOINTS.NEWS_API_URL, {
                 //YOU NEED TO PROVIDE YOUR "APIXU" API KEY HERE, see /utils/api.js file to grab the DOCUMENTATION file
                 apiKey: NEWS_API_KEY,
-                source: 'techcrunch'
+                source: this.state.s
             })
 
             this.setState( {
                 news: _news
+            })
+
+        }
+        catch ( error ) {
+            Materialize.toast( error, 8000, 'error-toast' )
+            console.log( 'Failed fetching data: ', error )
+        }
+
+    }
+
+    componentWillMount() {
+        this.fetchSource()
+    }
+    fetchSource = async () => {
+
+
+        /* ASYNC - AWAIT DOCUMENTATION : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/await */
+
+        try {
+            let _listSource = await get( ENDPOINTS.NEWS_API_URL_BIS, {
+                //YOU NEED TO PROVIDE YOUR "APIXU" API KEY HERE, see /utils/api.js file to grab the DOCUMENTATION file
+                apiKey: NEWS_API_KEY,
+                //source: this.state.s
+            })
+
+            this.setState( {
+                //news: _news
+                listSource: _listSource.sources
             })
 
         }
@@ -136,11 +196,16 @@ class App extends Component {
 
             console.log( news )
 
-            const _title = news.articles[ 0 ].title
 
-            return (
-                <NewsCard picture={ defaultPicture } text={ 'hey' } title={ _title }
-                    />
+            return news.articles.map(
+                article => {
+                    //return <NewsCard title={ article.title } />
+                    return (
+                        <NewsCard picture={ article.urlToImage } text={ article.description } title={ article.title } url={ article.url }
+                            />
+                    )
+
+                }
             )
         }
 

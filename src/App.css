@@ -7,11 +7,14 @@
 }
 
 .App-header {
-    text-align: right;
+    text-align: center;
     background-color: #222;
     height: 60px;
     padding: 5px 10px;
     color: white;
+}
+.App-material-icon{
+    vertical-align: left;
 }
 
 .App-header h1 {
@@ -23,6 +26,14 @@
     display: inline-block;
 }
 
+.App-Button{
+    font-family: cursive
+}
+
+.App-Select{
+    height: 30px;
+    width: 50px;
+}
 .App-content {
     padding: 20px;
 }
